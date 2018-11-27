@@ -42,7 +42,7 @@ size_t memVal::getLen()
 
 void memVal::setVal(void *newVal)
 {
-	if (needToFree && getVal() != nullptr)
+	if (needToFree && getVal() != nullptr && getVal() != newVal)
 	{
 		delete[] static_cast<char*>(getVal());
 	}

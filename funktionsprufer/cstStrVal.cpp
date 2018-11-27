@@ -41,7 +41,7 @@ bool cstStrVal::equalsSameType(spAbsVal<const char*> cmpVal)
 
 void cstStrVal::setVal(const char *newVal)
 {
-	if (needToFree && getVal() != nullptr)
+	if (needToFree && getVal() != nullptr && getVal() != newVal)
 	{
 		delete[] getVal();
 	}
