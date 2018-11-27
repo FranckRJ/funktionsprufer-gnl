@@ -6,7 +6,7 @@
 #    By: fwerner <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 14:25:16 by fwerner           #+#    #+#              #
-#    Updated: 2018/11/27 13:38:36 by fwerner          ###   ########.fr        #
+#    Updated: 2018/11/27 14:45:53 by fwerner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJS = $(SRCS:.cpp=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	g++ $(CFLAGS) $(OBJS) -o $(NAME) -I gnl/libft/includes -L gnl/libft -L gnl -lft -lgnl
+	g++ $(CFLAGS) $(OBJS) -o $(NAME) -I gnl/libft/includes -L gnl/libft -L gnl -lft -lgnl-1 -lgnl-2 -lgnl-10 -lgnl-32 -lgnl-100 -lgnl-9999 -lgnl-10000000
 
 %.o : %.cpp $(INCLUDES) $(TPPS)
 	g++ $(CFLAGS) -c $< -o $@ -I gnl/libft/includes

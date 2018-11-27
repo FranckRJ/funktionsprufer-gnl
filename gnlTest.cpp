@@ -30,9 +30,10 @@ void gnlTest::processTest()
 {
 	long int baseFilePos = 0;
 	off_t testFilePos = 0;
-	int fdNumToUse = -1;;
+	int fdNumToUse = -1;
 	spStrVal baseLine = mkSpStrVal(nullptr, "*line", true);
 	spStrVal testLine = mkSpStrVal(nullptr, "*line", true);
+	std::function<int(const int, char**)> getNextLine;
 	std::function<spBaseVal<int>(spCstStrVal, spStrVal)> baseFunction =
 		[&](spCstStrVal fn, spStrVal line)
 		{
@@ -81,7 +82,7 @@ void gnlTest::processTest()
 				int dummyFd = open(fn->getVal(), O_RDONLY);
 				int fdToUse = dup2(dummyFd, 101);
 				lseek(fdToUse, testFilePos, SEEK_SET);
-				int gnlRet = get_next_line(fdToUse, nullptr);
+				int gnlRet = getNextLine(fdToUse, nullptr);
 				testFilePos = lseek(fdToUse, 0, SEEK_CUR);
 				close(fdToUse);
 				close(dummyFd);
@@ -93,7 +94,7 @@ void gnlTest::processTest()
 				int fdToUse = dup2(dummyFd, 100 + fdNumToUse);
 				lseek(fdToUse, testFilePos, SEEK_SET);
 				char *newLine = testLine->getVal();
-				int gnlRet = get_next_line(fdToUse, &newLine);
+				int gnlRet = getNextLine(fdToUse, &newLine);
 				testLine->setVal(newLine);
 				testFilePos = lseek(fdToUse, 0, SEEK_CUR);
 				close(fdToUse);
@@ -104,12 +105,28 @@ void gnlTest::processTest()
 	auto testValsFun =
 		[&](bool printRes) {return compareVals(printRes, std::pair<spStrVal, spStrVal>(baseLine, testLine));};
 
+	auto gnl1 = [](const int fd, char **line) {return get_next_line_1(fd, line);};
+	auto gnl2 = [](const int fd, char **line) {return get_next_line_2(fd, line);};
+	auto gnl10 = [](const int fd, char **line) {return get_next_line_10(fd, line);};
+	auto gnl32 = [](const int fd, char **line) {return get_next_line_32(fd, line);};
+	auto gnl100 = [](const int fd, char **line) {return get_next_line_100(fd, line);};
+	auto gnl9999 = [](const int fd, char **line) {return get_next_line_9999(fd, line);};
+	auto gnl10000000 = [](const int fd, char **line) {return get_next_line_10000000(fd, line);};
+
 	{
+		getNextLine = gnl1;
 		testThisFunAndVals(baseFunction, testFunction, testValsFun, mkSpCstStrVal("NULL", "fd"), baseLine);
 	}
 	{
 		char fileName[] = "01-test.txt";
 		fdNumToUse = 1;
+		getNextLine = gnl1;
+		for (int i = 0; i < 10; ++i)
+			testThisFunAndVals(baseFunction, testFunction, testValsFun, mkSpCstStrVal(fileName, "fd"), baseLine);
+		fdNumToUse = 2;
+		baseFilePos = 0;
+		testFilePos = 0;
+		getNextLine = gnl2;
 		for (int i = 0; i < 10; ++i)
 			testThisFunAndVals(baseFunction, testFunction, testValsFun, mkSpCstStrVal(fileName, "fd"), baseLine);
 	}

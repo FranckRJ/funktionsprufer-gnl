@@ -51,6 +51,33 @@ function del_cpp_keyword_varh
 	sed -i "" "s/true/True/g" $varh
 }
 
+function add_one_gnl_buf_size
+{
+cat gnl/get_next_line.h | sed "/get_next_line_1(/ a\\
+int				get_next_line_$num(const int fd, char **line);
+" > gnl/get_next_line.h.tmp
+rm gnl/get_next_line.h
+mv gnl/get_next_line.h.tmp gnl/get_next_line.h
+}
+
+function add_all_gnl_buf_size
+{
+	sed -i "" "s/get_next_line(/get_next_line_1(/g" gnl/get_next_line.h
+	sed -i "" "s/get_next_line_[0-9]*(/get_next_line_1(/g" gnl/get_next_line.h
+	num="2"
+	add_one_gnl_buf_size
+	num="10"
+	add_one_gnl_buf_size
+	num="32"
+	add_one_gnl_buf_size
+	num="100"
+	add_one_gnl_buf_size
+	num="9999"
+	add_one_gnl_buf_size
+	num="10000000"
+	add_one_gnl_buf_size
+}
+
 for param in "$@"; do
 	if [[ "$param" =~ ^--.* ]]; then
 		if [[ "$param" == "--nogetgnl" ]]; then
@@ -93,14 +120,17 @@ if [[ "$getGnlFiles" == "true" ]]; then
 	cp "${gnlPath}/get_next_line.c" "${gnlPath}/get_next_line.h" "gnl/"
 	cp -R "${gnlPath}/libft" "gnl/"
 	make -C gnl/libft
+	cp change_gnl_buf_size.sh gnl/change_gnl_buf_size.sh
+	cp gnl_make_all.sh gnl/gnl_make_all.sh
 	cp gnl.makefile gnl/Makefile
-	make -C gnl
+	(cd gnl; ./gnl_make_all.sh)
 	varh="gnl/libft/includes/libft.h"
 	add_extern_c_varh
 	del_cpp_keyword_varh
 	varh="gnl/get_next_line.h"
 	add_extern_c_varh
 	del_cpp_keyword_varh
+	add_all_gnl_buf_size
 fi
 if [[ "$makeTests" == "true" ]]; then
 	make -j4
