@@ -6,7 +6,7 @@
 #    By: fwerner <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 14:25:16 by fwerner           #+#    #+#              #
-#    Updated: 2018/11/26 15:39:01 by fwerner          ###   ########.fr        #
+#    Updated: 2018/11/27 13:38:36 by fwerner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,15 @@ TPPS += $(wildcard funktionsprufer/*.tpp)
 INCLUDES = $(wildcard *.hpp)
 INCLUDES += $(wildcard funktionsprufer/*.hpp)
 INCLUDES += $(wildcard gnl/*.h)
+OBJS = $(SRCS:.cpp=.o)
 
 all: $(NAME)
 
-$(NAME): $(SRCS) $(INCLUDES) $(TPPS)
-	g++ $(CFLAGS) $(SRCS) -o $(NAME) -I gnl/libft/includes -L gnl/libft -L gnl -lft -lgnl
+$(NAME): $(OBJS)
+	g++ $(CFLAGS) $(OBJS) -o $(NAME) -I gnl/libft/includes -L gnl/libft -L gnl -lft -lgnl
+
+%.o : %.cpp $(INCLUDES) $(TPPS)
+	g++ $(CFLAGS) -c $< -o $@ -I gnl/libft/includes
 
 clean:
 	rm -f $(OBJS)

@@ -103,5 +103,5 @@ if [[ "$getGnlFiles" == "true" ]]; then
 	del_cpp_keyword_varh
 fi
 if [[ "$makeTests" == "true" ]]; then
-	make
+	make -j4
 fi
