@@ -45,7 +45,21 @@ int main(int argc, char **argv)
 			--realArgc;
 			if (curArg.substr(0, 2) == "-r")
 			{
-				removedTests.push_back(curArg.substr(2));
+				std::string funToRemove = curArg.substr(2);
+				if (funToRemove.find('-') == std::string::npos)
+				{
+					removedTests.push_back(funToRemove + "-1");
+					removedTests.push_back(funToRemove + "-2");
+					removedTests.push_back(funToRemove + "-10");
+					removedTests.push_back(funToRemove + "-32");
+					removedTests.push_back(funToRemove + "-100");
+					removedTests.push_back(funToRemove + "-9999");
+					removedTests.push_back(funToRemove + "-10000000");
+				}
+				else
+				{
+					removedTests.push_back(funToRemove);
+				}
 			}
 			else if (curArg == "--erronly")
 			{
@@ -95,22 +109,48 @@ int main(int argc, char **argv)
 		absTest::isVerbose = true;
 		for (int i = 1; i < argc; ++i)
 		{
-			std::string strToFind = argv[i];
-			std::map<std::string, std::function<int()>>::iterator it = testList.find(strToFind);
-
-			if (it != testList.end())
+			if (argv[i][0] != '-')
 			{
-				int tmpResult = it->second();
+				bool oneTestHasBeDone = false;
+				std::string strToFind = argv[i];
+				std::list<std::string> listOfFunToTests;
 
-				if (tmpResult > 0)
+				if (strToFind.find('-') == std::string::npos)
 				{
-					errCount += tmpResult;
-					++nbOfTestsWithError;
+					listOfFunToTests.push_back(strToFind + "-1");
+					listOfFunToTests.push_back(strToFind + "-2");
+					listOfFunToTests.push_back(strToFind + "-10");
+					listOfFunToTests.push_back(strToFind + "-32");
+					listOfFunToTests.push_back(strToFind + "-100");
+					listOfFunToTests.push_back(strToFind + "-9999");
+					listOfFunToTests.push_back(strToFind + "-10000000");
 				}
-			}
-			else if (strToFind[0] != '-')
-			{
-				std::cout << "Erreur : pas de tests nomme " << strToFind << "." << std::endl << std::endl;
+				else
+				{
+					listOfFunToTests.push_back(strToFind);
+				}
+
+				for (const std::string& thisStr : listOfFunToTests)
+				{
+					std::map<std::string, std::function<int()>>::iterator it = testList.find(thisStr);
+
+					if (it != testList.end())
+					{
+						int tmpResult = it->second();
+						oneTestHasBeDone = true;
+
+						if (tmpResult > 0)
+						{
+							errCount += tmpResult;
+							++nbOfTestsWithError;
+						}
+					}
+				}
+
+				if (!oneTestHasBeDone)
+				{
+					std::cout << "Erreur : pas de tests nomme " << strToFind << "." << std::endl << std::endl;
+				}
 			}
 		}
 	}
