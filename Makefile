@@ -6,7 +6,7 @@
 #    By: fwerner <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 14:25:16 by fwerner           #+#    #+#              #
-#    Updated: 2018/11/27 14:45:53 by fwerner          ###   ########.fr        #
+#    Updated: 2018/11/28 12:20:13 by fwerner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,4 +35,6 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
-re: fclean all
+re:
+	make fclean
+	make all
