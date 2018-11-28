@@ -13,7 +13,15 @@ R"str(DESCRIPTION:
 Execute les tests de gnl.
 
 LISTE DES COMMANDES:
---erronly                 Affiche uniquement les tests echoues.
+<nom_du_test>[-n]         Affiche le detail de ce test (mode verbeux).
+                          Plusieurs tests peuvent etres appeles, seuls les tests appeles
+                          seront testes.
+                          Si -n est precise (ex : "basic-32") seul le test avec le buffer
+                          de taille n sera appele.
+-r<nom_du_test>[-n]       Desactive ce test en mode non-verbeux.
+                          Si -n est precise (ex : "basic-32") seul le test avec le buffer
+                          de taille n est desactive.
+--erronly                 Affiche uniquement les tests echoues lors du mode verbeux.
 --nocrashtest             N'effectue pas les tests qui doivent crasher.
 --nouncleartest           N'effectue pas les tests dont le resultat n'est pas clair.
 --nocolor                 Desactive l'affichage avec des couleurs.
