@@ -26,8 +26,24 @@ void gnlBasicTest::processTest()
 		baseFilePos = 0;
 		testFilePos = 0;
 		baseLine->setVal(nullptr);
+		baseLine->setIsVoidVal(true);
+		baseLine->setName("line");
 		testLine->setVal(nullptr);
-		testThisFunAndVals(baseFunction, testFunction, testValsFun, mkSpCstStrVal("NULL", "fd"), baseLine);
+		testLine->setIsVoidVal(true);
+		testLine->setName("line");
+		testThisFunAndVals(baseFunction, testFunction, testValsFun, mkSpCstStrVal("", "fd"), baseLine);
+		baseLine->setIsVoidVal(false);
+		baseLine->setName("*line");
+		testLine->setIsVoidVal(false);
+		testLine->setName("*line");
+	}
+	{
+		fdNumToUse = 100;
+		baseFilePos = 0;
+		testFilePos = 0;
+		baseLine->setVal(nullptr);
+		testLine->setVal(nullptr);
+		testThisFunAndVals(baseFunction, testFunction, testValsFun, mkSpCstStrVal("", "fd"), baseLine);
 	}
 	{
 		char fileName[] = "basic-01-test.txt";
