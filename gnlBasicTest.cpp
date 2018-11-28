@@ -22,7 +22,7 @@ void gnlBasicTest::processTest()
 {
 	setGnlToRightBufSize();
 	{
-		fdNumToUse = 0;
+		fdNumToUse = 100;
 		baseFilePos = 0;
 		testFilePos = 0;
 		baseLine->setVal(nullptr);

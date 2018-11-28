@@ -7,6 +7,7 @@
 
 #include "funktionsprufer/colors.hpp"
 #include "gnlBasicTest.hpp"
+#include "gnlNoNewLineTest.hpp"
 
 static std::string HELP_INFOS =
 R"str(DESCRIPTION:
@@ -44,6 +45,13 @@ int main(int argc, char **argv)
 	testList.emplace("basic-100", std::bind(gnlBasicTest::launchTest, 100));
 	testList.emplace("basic-9999", std::bind(gnlBasicTest::launchTest, 9999));
 	testList.emplace("basic-10000000", std::bind(gnlBasicTest::launchTest, 10000000));
+	testList.emplace("nonewline-1", std::bind(gnlNoNewLineTest::launchTest, 1));
+	testList.emplace("nonewline-2", std::bind(gnlNoNewLineTest::launchTest, 2));
+	testList.emplace("nonewline-10", std::bind(gnlNoNewLineTest::launchTest, 10));
+	testList.emplace("nonewline-32", std::bind(gnlNoNewLineTest::launchTest, 32));
+	testList.emplace("nonewline-100", std::bind(gnlNoNewLineTest::launchTest, 100));
+	testList.emplace("nonewline-9999", std::bind(gnlNoNewLineTest::launchTest, 9999));
+	testList.emplace("nonewline-10000000", std::bind(gnlNoNewLineTest::launchTest, 10000000));
 
 	for (int i = 1; i < argc; ++i)
 	{

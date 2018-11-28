@@ -27,9 +27,9 @@ ${1}Test::${1}Test()
 	funToTestExist = true;
 }
 
-int ${1}Test::launchTest()
+int ${1}Test::launchTest(int newBufSizeToUse)
 {
-	gnlBasicTest test;
+	${1}Test test;
 
 	test.bufSizeToUse = newBufSizeToUse;
 	test.startTest(" -------- Test : _PLACEHOLDER_, BUFF_SIZE : " + std::to_string(test.bufSizeToUse) + ".", false);
@@ -41,7 +41,7 @@ void ${1}Test::processTest()
 {
 	setGnlToRightBufSize();
 	{
-		fdNumToUse = 0;
+		fdNumToUse = 000;
 		baseFilePos = 0;
 		testFilePos = 0;
 		baseLine->setVal(nullptr);
@@ -49,8 +49,8 @@ void ${1}Test::processTest()
 		testThisFunAndVals(baseFunction, testFunction, testValsFun, mkSpCstStrVal("NULL", "fd"), baseLine);
 	}
 	{
-		char fileName[] = "01-test.txt";
-		fdNumToUse = 1;
+		char fileName[] = "placeholder-01-test.txt";
+		fdNumToUse = 001;
 		baseFilePos = 0;
 		testFilePos = 0;
 		baseLine->setVal(nullptr);
