@@ -8,9 +8,9 @@ bool absTest::showOnlyErrors = false;
 bool absTest::dontDoTestThatCrash = false;
 bool absTest::dontDoUnclearTest = false;
 
-void absTest::startTest(std::string funName)
+void absTest::startTest(std::string funName, bool alignNames)
 {
-	msgTestBegin(funName);
+	msgTestBegin(funName, alignNames);
 	processTest();
 	msgTestEnd();
 
@@ -20,12 +20,19 @@ void absTest::startTest(std::string funName)
 	}
 }
 
-void absTest::msgTestBegin(std::string funName)
+void absTest::msgTestBegin(std::string funName, bool alignNames)
 {
-	int nbOfSpaces = 75 - funName.size();
-	std::cout << " " << std::string((nbOfSpaces / 2) + (nbOfSpaces % 2), '-') << " ";
-	std::cout << funName;
-	std::cout << " " << std::string(nbOfSpaces / 2, '-') << std::endl;
+	if (alignNames)
+	{
+		int nbOfSpaces = 75 - funName.size();
+		std::cout << " " << std::string((nbOfSpaces / 2) + (nbOfSpaces % 2), '-') << " ";
+		std::cout << funName;
+		std::cout << " " << std::string(nbOfSpaces / 2, '-') << std::endl;
+	}
+	else
+	{
+		std::cout << funName << std::endl;
+	}
 }
 
 void absTest::msgTestEnd()

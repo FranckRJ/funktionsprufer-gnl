@@ -13,7 +13,7 @@ public:
 	static bool dontDoUnclearTest;
 	virtual ~absTest() = default;
 protected:
-	void startTest(std::string funName);
+	void startTest(std::string funName, bool alignNames = true);
 	virtual void processTest() = 0;
 	template <class Tret, class... Tpar>
 	void crashTestTheseFun(std::function<Tret(Tpar...)> baseFunToTest,
@@ -41,7 +41,7 @@ private:
 	std::string paramsToString(Tfstpar param);
 	template <class Tfstpar, class... Tothpar>
 	std::string paramsToString(Tfstpar fstParam, Tothpar... othParams);
-	void msgTestBegin(std::string funName);
+	void msgTestBegin(std::string funName, bool alignNames);
 	void msgTestEnd();
 protected:
 	bool funToTestExist = false;

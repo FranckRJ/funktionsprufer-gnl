@@ -7,34 +7,18 @@
 #include <fcntl.h>
 
 #include "gnl/get_next_line.h"
-#include "funktionsprufer/baseVal.hpp"
-#include "funktionsprufer/strVal.hpp"
-#include "funktionsprufer/cstStrVal.hpp"
 #include "gnlTest.hpp"
 
 gnlTest::gnlTest()
 {
 	funToTestExist = true;
-}
 
-int gnlTest::launchTest()
-{
-	gnlTest test;
-
-	test.startTest("get_next_line(const int fd, char **line)");
-
-	return test.errCount;
-}
-
-void gnlTest::processTest()
-{
-	long int baseFilePos = 0;
-	off_t testFilePos = 0;
-	int fdNumToUse = -1;
-	spStrVal baseLine = mkSpStrVal(nullptr, "*line", true);
-	spStrVal testLine = mkSpStrVal(nullptr, "*line", true);
-	std::function<int(const int, char**)> getNextLine;
-	std::function<spBaseVal<int>(spCstStrVal, spStrVal)> baseFunction =
+	baseFilePos = 0;
+	testFilePos = 0;
+	fdNumToUse = -1;
+	baseLine = mkSpStrVal(nullptr, "*line", true);
+	testLine = mkSpStrVal(nullptr, "*line", true);
+	baseFunction =
 		[&](spCstStrVal fn, spStrVal line)
 		{
 			(void)line;
@@ -73,7 +57,7 @@ void gnlTest::processTest()
 				return mkSpBaseVal<int>(getLineRet > 0 ? 1 : getLineRet);
 			}
 		};
-	std::function<spBaseVal<int>(spCstStrVal, spStrVal)> testFunction =
+	testFunction =
 		[&](spCstStrVal fn, spStrVal line)
 		{
 			(void)line;
@@ -102,32 +86,56 @@ void gnlTest::processTest()
 				return mkSpBaseVal<int>(gnlRet);
 			}
 		};
-	auto testValsFun =
+	testValsFun =
 		[&](bool printRes) {return compareVals(printRes, std::pair<spStrVal, spStrVal>(baseLine, testLine));};
 
-	auto gnl1 = [](const int fd, char **line) {return get_next_line_1(fd, line);};
-	auto gnl2 = [](const int fd, char **line) {return get_next_line_2(fd, line);};
-	auto gnl10 = [](const int fd, char **line) {return get_next_line_10(fd, line);};
-	auto gnl32 = [](const int fd, char **line) {return get_next_line_32(fd, line);};
-	auto gnl100 = [](const int fd, char **line) {return get_next_line_100(fd, line);};
-	auto gnl9999 = [](const int fd, char **line) {return get_next_line_9999(fd, line);};
-	auto gnl10000000 = [](const int fd, char **line) {return get_next_line_10000000(fd, line);};
+	gnl1 = [](const int fd, char **line) {return get_next_line_1(fd, line);};
+	gnl2 = [](const int fd, char **line) {return get_next_line_2(fd, line);};
+	gnl10 = [](const int fd, char **line) {return get_next_line_10(fd, line);};
+	gnl32 = [](const int fd, char **line) {return get_next_line_32(fd, line);};
+	gnl100 = [](const int fd, char **line) {return get_next_line_100(fd, line);};
+	gnl9999 = [](const int fd, char **line) {return get_next_line_9999(fd, line);};
+	gnl10000000 = [](const int fd, char **line) {return get_next_line_10000000(fd, line);};
+}
 
+void gnlTest::setGnlToRightBufSize()
+{
+	switch (bufSizeToUse)
 	{
-		getNextLine = gnl1;
-		testThisFunAndVals(baseFunction, testFunction, testValsFun, mkSpCstStrVal("NULL", "fd"), baseLine);
-	}
-	{
-		char fileName[] = "01-test.txt";
-		fdNumToUse = 1;
-		getNextLine = gnl1;
-		for (int i = 0; i < 10; ++i)
-			testThisFunAndVals(baseFunction, testFunction, testValsFun, mkSpCstStrVal(fileName, "fd"), baseLine);
-		fdNumToUse = 2;
-		baseFilePos = 0;
-		testFilePos = 0;
-		getNextLine = gnl2;
-		for (int i = 0; i < 10; ++i)
-			testThisFunAndVals(baseFunction, testFunction, testValsFun, mkSpCstStrVal(fileName, "fd"), baseLine);
+		case 1:
+		{
+			getNextLine = gnl1;
+			break;
+		}
+		case 2:
+		{
+			getNextLine = gnl2;
+			break;
+		}
+		case 10:
+		{
+			getNextLine = gnl10;
+			break;
+		}
+		case 32:
+		{
+			getNextLine = gnl32;
+			break;
+		}
+		case 100:
+		{
+			getNextLine = gnl100;
+			break;
+		}
+		case 9999:
+		{
+			getNextLine = gnl9999;
+			break;
+		}
+		case 10000000:
+		{
+			getNextLine = gnl10000000;
+			break;
+		}
 	}
 }
