@@ -9,6 +9,7 @@
 #include "gnlBasicTest.hpp"
 #include "gnlNoNewLineTest.hpp"
 #include "gnlBinaryTest.hpp"
+#include "gnlMultifdTest.hpp"
 
 static std::string HELP_INFOS =
 R"str(DESCRIPTION:
@@ -60,6 +61,13 @@ int main(int argc, char **argv)
 	testList.emplace("binary-100", std::bind(gnlBinaryTest::launchTest, 100));
 	testList.emplace("binary-9999", std::bind(gnlBinaryTest::launchTest, 9999));
 	testList.emplace("binary-10000000", std::bind(gnlBinaryTest::launchTest, 10000000));
+	testList.emplace("multifd-1", std::bind(gnlMultifdTest::launchTest, 1));
+	testList.emplace("multifd-2", std::bind(gnlMultifdTest::launchTest, 2));
+	testList.emplace("multifd-10", std::bind(gnlMultifdTest::launchTest, 10));
+	testList.emplace("multifd-32", std::bind(gnlMultifdTest::launchTest, 32));
+	testList.emplace("multifd-100", std::bind(gnlMultifdTest::launchTest, 100));
+	testList.emplace("multifd-9999", std::bind(gnlMultifdTest::launchTest, 9999));
+	testList.emplace("multifd-10000000", std::bind(gnlMultifdTest::launchTest, 10000000));
 
 	for (int i = 1; i < argc; ++i)
 	{
