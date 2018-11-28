@@ -8,6 +8,7 @@
 #include "funktionsprufer/colors.hpp"
 #include "gnlBasicTest.hpp"
 #include "gnlNoNewLineTest.hpp"
+#include "gnlBinaryTest.hpp"
 
 static std::string HELP_INFOS =
 R"str(DESCRIPTION:
@@ -52,6 +53,13 @@ int main(int argc, char **argv)
 	testList.emplace("nonewline-100", std::bind(gnlNoNewLineTest::launchTest, 100));
 	testList.emplace("nonewline-9999", std::bind(gnlNoNewLineTest::launchTest, 9999));
 	testList.emplace("nonewline-10000000", std::bind(gnlNoNewLineTest::launchTest, 10000000));
+	testList.emplace("binary-1", std::bind(gnlBinaryTest::launchTest, 1));
+	testList.emplace("binary-2", std::bind(gnlBinaryTest::launchTest, 2));
+	testList.emplace("binary-10", std::bind(gnlBinaryTest::launchTest, 10));
+	testList.emplace("binary-32", std::bind(gnlBinaryTest::launchTest, 32));
+	testList.emplace("binary-100", std::bind(gnlBinaryTest::launchTest, 100));
+	testList.emplace("binary-9999", std::bind(gnlBinaryTest::launchTest, 9999));
+	testList.emplace("binary-10000000", std::bind(gnlBinaryTest::launchTest, 10000000));
 
 	for (int i = 1; i < argc; ++i)
 	{
