@@ -64,7 +64,7 @@ gnlTest::gnlTest()
 			if (testLine->getIsVoidVal())
 			{
 				int dummyFd = open(fn->getVal(), O_RDONLY);
-				int fdToUse = dup2(dummyFd, 101);
+				int fdToUse = dup2(dummyFd, 1000 + fdNumToUse);
 				lseek(fdToUse, testFilePos, SEEK_SET);
 				int gnlRet = getNextLine(fdToUse, nullptr);
 				testFilePos = lseek(fdToUse, 0, SEEK_CUR);
@@ -75,7 +75,7 @@ gnlTest::gnlTest()
 			else
 			{
 				int dummyFd = open(fn->getVal(), O_RDONLY);
-				int fdToUse = dup2(dummyFd, 100 + fdNumToUse);
+				int fdToUse = dup2(dummyFd, 1000 + fdNumToUse);
 				lseek(fdToUse, testFilePos, SEEK_SET);
 				char *newLine = testLine->getVal();
 				int gnlRet = getNextLine(fdToUse, &newLine);

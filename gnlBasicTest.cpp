@@ -30,13 +30,33 @@ void gnlBasicTest::processTest()
 		testThisFunAndVals(baseFunction, testFunction, testValsFun, mkSpCstStrVal("NULL", "fd"), baseLine);
 	}
 	{
-		char fileName[] = "01-test.txt";
-		fdNumToUse = 1;
+		char fileName[] = "basic-01-test.txt";
+		fdNumToUse = 101;
 		baseFilePos = 0;
 		testFilePos = 0;
 		baseLine->setVal(nullptr);
 		testLine->setVal(nullptr);
-		for (int i = 0; i < 10; ++i)
+		for (int i = 0; i < 18; ++i)
+			testThisFunAndVals(baseFunction, testFunction, testValsFun, mkSpCstStrVal(fileName, "fd"), baseLine);
+	}
+	{
+		char fileName[] = "basic-02-test.txt";
+		fdNumToUse = 102;
+		baseFilePos = 0;
+		testFilePos = 0;
+		baseLine->setVal(nullptr);
+		testLine->setVal(nullptr);
+		for (int i = 0; i < 5; ++i)
+			testThisFunAndVals(baseFunction, testFunction, testValsFun, mkSpCstStrVal(fileName, "fd"), baseLine);
+	}
+	{
+		char fileName[] = "basic-03-test.txt";
+		fdNumToUse = 103;
+		baseFilePos = 0;
+		testFilePos = 0;
+		baseLine->setVal(nullptr);
+		testLine->setVal(nullptr);
+		for (int i = 0; i < 6; ++i)
 			testThisFunAndVals(baseFunction, testFunction, testValsFun, mkSpCstStrVal(fileName, "fd"), baseLine);
 	}
 }

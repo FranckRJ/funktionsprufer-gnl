@@ -95,8 +95,7 @@ int main(int argc, char **argv)
 		absTest::isVerbose = true;
 		for (int i = 1; i < argc; ++i)
 		{
-			std::string strArg = argv[i];
-			std::string strToFind = (strArg.substr(0, 3) == "ft_") ? strArg : "ft_" + strArg;
+			std::string strToFind = argv[i];
 			std::map<std::string, std::function<int()>>::iterator it = testList.find(strToFind);
 
 			if (it != testList.end())
@@ -109,9 +108,9 @@ int main(int argc, char **argv)
 					++nbOfTestsWithError;
 				}
 			}
-			else if (strArg[0] != '-')
+			else if (strToFind[0] != '-')
 			{
-				std::cout << "Erreur : pas de tests nomme " << strArg << "." << std::endl << std::endl;
+				std::cout << "Erreur : pas de tests nomme " << strToFind << "." << std::endl << std::endl;
 			}
 		}
 	}
