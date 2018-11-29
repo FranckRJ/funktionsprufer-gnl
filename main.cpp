@@ -10,6 +10,7 @@
 #include "gnlNoNewLineTest.hpp"
 #include "gnlBinaryTest.hpp"
 #include "gnlMultifdTest.hpp"
+#include "gnlAdvancedTest.hpp"
 
 static std::string HELP_INFOS =
 R"str(DESCRIPTION:
@@ -68,6 +69,13 @@ int main(int argc, char **argv)
 	testList.emplace("multifd-100", std::bind(gnlMultifdTest::launchTest, 100));
 	testList.emplace("multifd-9999", std::bind(gnlMultifdTest::launchTest, 9999));
 	testList.emplace("multifd-10000000", std::bind(gnlMultifdTest::launchTest, 10000000));
+	testList.emplace("advanced-1", std::bind(gnlAdvancedTest::launchTest, 1));
+	testList.emplace("advanced-2", std::bind(gnlAdvancedTest::launchTest, 2));
+	testList.emplace("advanced-10", std::bind(gnlAdvancedTest::launchTest, 10));
+	testList.emplace("advanced-32", std::bind(gnlAdvancedTest::launchTest, 32));
+	testList.emplace("advanced-100", std::bind(gnlAdvancedTest::launchTest, 100));
+	testList.emplace("advanced-9999", std::bind(gnlAdvancedTest::launchTest, 9999));
+	testList.emplace("advanced-10000000", std::bind(gnlAdvancedTest::launchTest, 10000000));
 
 	for (int i = 1; i < argc; ++i)
 	{
