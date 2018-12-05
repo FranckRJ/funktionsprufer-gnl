@@ -57,4 +57,16 @@ void gnlAdvancedTest::processTest()
 			testThisFun(baseFunction, testFunction, mkSpCstStrVal(fileName, "fd"), baseLine);
 		}
 	}
+	{
+		char fileName[] = "/dev/null";
+		fdNumToUse = 503;
+		baseFilePos = 0;
+		testFilePos = 0;
+		for (int i = 0; i < 3; ++i)
+		{
+			baseLine->setVal(nullptr);
+			testLine->setVal(nullptr);
+			testThisFun(baseFunction, testFunction, mkSpCstStrVal(fileName, "fd"), baseLine);
+		}
+	}
 }

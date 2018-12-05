@@ -1,3 +1,4 @@
 *.o
 gnl
 test-gnl
+tmpfile.txt

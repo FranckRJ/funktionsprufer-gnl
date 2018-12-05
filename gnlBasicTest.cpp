@@ -51,4 +51,14 @@ void gnlBasicTest::processTest()
 		for (int i = 0; i < 6; ++i)
 			testThisFunAndVals(baseFunction, testFunction, testValsFun, mkSpCstStrVal(fileName, "fd"), baseLine);
 	}
+	{
+		char fileName[] = "basic-04-test.txt";
+		fdNumToUse = 104;
+		baseFilePos = 0;
+		testFilePos = 0;
+		baseLine->setVal(nullptr);
+		testLine->setVal(nullptr);
+		for (int i = 0; i < 3; ++i)
+			testThisFunAndVals(baseFunction, testFunction, testValsFun, mkSpCstStrVal(fileName, "fd"), baseLine);
+	}
 }
