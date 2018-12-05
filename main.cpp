@@ -204,7 +204,7 @@ int main(int argc, char **argv)
 	else
 	{
 		std::cout << colors::red();
-		std::cout << "Erreurs : " << errCount << ". Tests concernees : " << nbOfTestsWithError << ".";
+		std::cout << "Erreurs : " << errCount << ". Tests concernes : " << nbOfTestsWithError << ".";
 	}
 	std::cout << colors::reset() << std::endl;
 
