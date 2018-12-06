@@ -124,6 +124,11 @@ if [[ "$getGnlFiles" == "true" ]]; then
 	cp gnl_make_all.sh gnl/gnl_make_all.sh
 	cp gnl.makefile gnl/Makefile
 	(cd gnl; ./gnl_make_all.sh)
+	mkdir "gnl/libft/includes"
+	cp "gnl/libft/libft.h" "gnl/libft/includes/"
+	varh="gnl/libft/libft.h"
+	add_extern_c_varh
+	del_cpp_keyword_varh
 	varh="gnl/libft/includes/libft.h"
 	add_extern_c_varh
 	del_cpp_keyword_varh
