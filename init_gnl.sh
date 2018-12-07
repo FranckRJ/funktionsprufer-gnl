@@ -122,6 +122,7 @@ if [[ "$getGnlFiles" == "true" ]]; then
 	make -C gnl/libft
 	mkdir "gnl/libft/includes"
 	mv "gnl/libft/libft.h" "gnl/libft/includes/"
+	sed -i "" "s/libft\/libft\.h/libft.h/g" "gnl/get_next_line.c"
 	sed -i "" "s/libft\/libft\.h/libft.h/g" "gnl/get_next_line.h"
 	cp change_gnl_buf_size.sh gnl/change_gnl_buf_size.sh
 	cp gnl_make_all.sh gnl/gnl_make_all.sh
