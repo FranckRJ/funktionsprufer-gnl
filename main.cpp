@@ -26,8 +26,6 @@ LISTE DES COMMANDES:
                           Si -n est precise (ex : "basic-32") seul le test avec le buffer
                           de taille n est desactive.
 --erronly                 Affiche uniquement les tests echoues lors du mode verbeux.
---nocrashtest             N'effectue pas les tests qui doivent crasher.
---nouncleartest           N'effectue pas les tests dont le resultat n'est pas clair.
 --nocolor                 Desactive l'affichage avec des couleurs.
 --help                    Affiche cette page d'aide.)str";
 
@@ -104,14 +102,6 @@ int main(int argc, char **argv)
 			else if (curArg == "--erronly")
 			{
 				absTest::showOnlyErrors = true;
-			}
-			else if (curArg == "--nocrashtest")
-			{
-				absTest::dontDoTestThatCrash = true;
-			}
-			else if (curArg == "--nouncleartest")
-			{
-				absTest::dontDoUnclearTest = true;
 			}
 			else if (curArg == "--nocolor")
 			{
