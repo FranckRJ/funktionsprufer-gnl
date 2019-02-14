@@ -115,7 +115,7 @@ for param in "$@"; do
 done
 
 if [[ "$getGnlFiles" == "true" ]]; then
-	rm -r "gnl"
+	rm -rf "gnl"
 	mkdir "gnl"
 	cp "${gnlPath}/get_next_line.c" "${gnlPath}/get_next_line.h" "gnl/"
 	cp -R "${gnlPath}/libft" "gnl/"
