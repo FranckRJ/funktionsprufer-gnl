@@ -1,3 +1,5 @@
+#!/bin/bash
+
 ./change_gnl_buf_size.sh 1
 make "libgnl-1.a"
 ./change_gnl_buf_size.sh 2

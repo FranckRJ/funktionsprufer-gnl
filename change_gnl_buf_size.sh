@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function change_gnl_name
 {
 	sed -i "" "s/get_next_line(/get_next_line_$num(/g" $file

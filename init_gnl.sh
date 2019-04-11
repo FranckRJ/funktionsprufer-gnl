@@ -1,3 +1,5 @@
+#!/bin/bash
+
 getGnlFiles="true"
 makeTests="true"
 gnlPath="../get_next_line"

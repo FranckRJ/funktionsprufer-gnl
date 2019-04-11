@@ -1,3 +1,5 @@
+#!/bin/bash
+
 read -r -d '' VAR << EOM
 #ifndef $(echo "$1"|awk '{print toupper($0)}')TEST_HPP
 #define $(echo "$1"|awk '{print toupper($0)}')TEST_HPP
