@@ -1,5 +1,3 @@
-Ein ekelhafter Code, eine wackelige Schnittstelle, aber mehr oder weniger strenge Tests.
-
 Votre dossier get\_next\_line doit etre totalement distinct du dossier funktionsprufer-gnl, l'un ne doit pas etre le parent de l'autre.  
 Votre fichier get\_next\_line.c ne doit contenir que des fonctions statiques (excepte get\_next\_line()).  
 Executez `./init_gnl.sh <chemin_vers_gnl>` pour initialiser les tests.  
